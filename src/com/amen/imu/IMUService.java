@@ -20,7 +20,7 @@ public class IMUService {
         sh.setInitParameter("com.sun.jersey.config.property.packages", "com.amen.imu.restful");
         sh.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
 
-        Server server = new Server(1002);
+        Server server = new Server(1025);
         ServletContextHandler context = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
         context.addServlet(sh, "/*");
         server.start();
