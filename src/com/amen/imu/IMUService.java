@@ -5,6 +5,7 @@ import com.sun.jersey.spi.container.servlet.ServletContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import com.amen.imu.AirportServlet;
 
 /**
  *
@@ -15,12 +16,12 @@ public class IMUService {
     public static void main(String[] args) throws Exception {
         ApplicationRuntime.parseApplicationParameters(args);
 
-        ServletHolder sh = new ServletHolder(ServletContainer.class);
+        ServletHolder sh = new ServletHolder(new AirportServlet());
         sh.setInitParameter("com.sun.jersey.config.property.resourceConfigClass", "com.sun.jersey.api.core.PackagesResourceConfig");
         sh.setInitParameter("com.sun.jersey.config.property.packages", "com.amen.imu.restful");
         sh.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
 
-        Server server = new Server(1025);
+        Server server = new Server(10000);
         ServletContextHandler context = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
         context.addServlet(sh, "/*");
         server.start();
